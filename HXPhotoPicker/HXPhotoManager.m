@@ -40,7 +40,7 @@
 
 //------//
 @property (assign, nonatomic) BOOL isOriginal;
-@property (assign, nonatomic) BOOL endIsOriginal;
+@property (assign, nonatomic) BOOL isOriginalOptional;
 @property (copy, nonatomic) NSString *photosTotalBtyes;
 @property (copy, nonatomic) NSString *endPhotosTotalBtyes;
 @property (strong, nonatomic) NSMutableArray *iCloudUploadArray;
@@ -92,6 +92,7 @@
     self.selectPhotoCancelDismissAnimated = YES;
     self.cameraFinishDismissAnimated = YES;
     self.cameraCancelDismissAnimated = YES;
+    self.isOriginalOptional = YES;
     
     self.selectedList = [NSMutableArray array];
     self.selectedPhotos = [NSMutableArray array];
@@ -976,6 +977,13 @@
 - (void)setOriginal:(BOOL)original {
     self.isOriginal = original;
 }
+- (BOOL)originalOptional {
+    return self.isOriginalOptional;
+}
+- (void)setOriginalOptional:(BOOL)optional {
+    self.isOriginalOptional = optional;
+}
+
 - (BOOL)beforeSelectCountIsMaximum {
     if (self.selectedList.count >= self.configuration.maxNum) {
         return YES;
@@ -1261,7 +1269,7 @@
     self.endSelectedVideos = [NSMutableArray arrayWithArray:array];
 }
 - (BOOL)afterOriginal {
-    return self.endIsOriginal;
+    return self.isOriginal;
 }
 - (void)afterSelectedArraySwapPlacesWithFromModel:(HXPhotoModel *)fromModel fromIndex:(NSInteger)fromIndex toModel:(HXPhotoModel *)toModel toIndex:(NSInteger)toIndex {
     [self.endSelectedList removeObject:toModel];
@@ -1497,7 +1505,6 @@
     self.selectedCameraList = [NSMutableArray arrayWithArray:self.endSelectedCameraList];
     self.selectedCameraPhotos = [NSMutableArray arrayWithArray:self.endSelectedCameraPhotos];
     self.selectedCameraVideos = [NSMutableArray arrayWithArray:self.endSelectedCameraVideos];
-    self.isOriginal = self.endIsOriginal;
     self.photosTotalBtyes = self.endPhotosTotalBtyes;
 }
 - (void)selectedListTransformAfter {
@@ -1520,7 +1527,6 @@
         self.endSelectedCameraList = [NSMutableArray arrayWithArray:self.selectedCameraList];
         self.endSelectedCameraPhotos = [NSMutableArray arrayWithArray:self.selectedCameraPhotos];
         self.endSelectedCameraVideos = [NSMutableArray arrayWithArray:self.selectedCameraVideos];
-        self.endIsOriginal = self.isOriginal;
         self.endPhotosTotalBtyes = self.photosTotalBtyes;
         
         [self cancelBeforeSelectedList];
@@ -1571,7 +1577,6 @@
     [self.endSelectedVideos removeAllObjects];
     [self.endSelectedPhotos removeAllObjects];
     [self.endSelectedVideos removeAllObjects];
-    self.endIsOriginal = NO;
     self.endPhotosTotalBtyes = nil;
     
     [self.selectedList removeAllObjects];

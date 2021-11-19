@@ -166,6 +166,12 @@
 /// 完成之前设置是否原图
 - (void)setOriginal:(BOOL)original;
 
+/// 原图按钮是否可选
+- (BOOL)originalOptional;
+
+/// 设置原图按钮是否可选
+- (void)setOriginalOptional:(BOOL)optional;
+
 /// 完成之前的照片数组是否达到最大数
 - (BOOL)beforeSelectPhotoCountIsMaximum;
 

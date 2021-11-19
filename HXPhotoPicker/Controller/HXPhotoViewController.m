@@ -3284,6 +3284,8 @@ HX_PhotoEditViewControllerDelegate
     self.bgView.translucent = manager.configuration.bottomViewTranslucent;
     self.barTintColor = manager.configuration.bottomViewBgColor;
     self.bgView.barStyle = manager.configuration.bottomViewBarStyle;
+    self.originalBtn.userInteractionEnabled = self.manager.originalOptional;
+    [self.originalBtn setAlpha:self.manager.originalOptional?1:0.5];
     self.originalBtn.hidden = self.manager.configuration.hideOriginalBtn;
     if (manager.type == HXPhotoManagerSelectedTypePhoto) {
         self.editBtn.hidden = !manager.configuration.photoCanEdit;
